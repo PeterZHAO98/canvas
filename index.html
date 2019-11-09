@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"></canvas>
+    <input type = "color" id = "picker"/>
+</body>
+
+
+<script>
+        myCanvas["width"] = window.innerWidth*0.8;
+        myCanvas["height"] = window.innerHeight*0.8;
+        let ctx = myCanvas.getContext("2d");
+        let PenDown =true;
+
+        myCanvas.addEventListener('mousemove',function (e) {
+            console.log(e);
+            if(PenDown){
+                ctx.beginPath();
+            ctx.arc(e.offsetX,e.offsetY,10,0,2*Math.PI);
+            ctx.fillStyle = picker.value;
+            ctx.fill();
+            }
+
+        });
+
+        document.addEventListener('keydown',function (e) {
+            console.log(e);
+            switch (e.key) {
+                case "b":
+                    picker.value = "#0000ff";
+                    break;
+                case "r":
+                    picker.value = "#ff0000";
+                    break;
+                case "g":
+                    picker.value = "#3cb371";
+                    break;
+                case "y":
+                    picker.value = "#ffa500";
+                    break;
+                case " ":
+                    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+                    break;
+                case "ArrowDown":
+                    PenDown = true;
+                    break;
+                case "ArrowUp":
+                    PenDown = false;
+                    break;
+
+            }
+        });
+
+
+
+</script>
+
+</html>
